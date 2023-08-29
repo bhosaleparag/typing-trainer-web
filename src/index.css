@@ -1,0 +1,99 @@
+:root {
+  font-family: 'Rubik', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  color: #f1f1f1;
+  background-color: #181c2c;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  --logoColor: #525974;
+  --logoColorHover: #787eff;
+}
+body,#root {
+  margin: 0;
+  place-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+.main-container{
+  display: flex;
+}
+.other{
+  margin: 2vw;
+  width: 96vw;
+}
+
+/* logo's style in navbar */
+
+.logo{
+  width: 20px;
+  height: 20px;
+  margin: 25px;
+  fill: var(--logoColor);
+  transition: fill 0.1s ease-in-out;
+}
+.typingLogo{
+  width: 30px;
+  height: 30px;
+  margin: 25px;
+}
+.feedbackLogo,.dashboardlogo{
+    width: 25px;
+    height: 25px;
+    margin: 20px;
+}
+.feedbackLogo path{
+    stroke: var(--logoColor);
+    stroke-width: 3;
+}
+.dashboardlogo{
+    stroke: var(--logoColor);
+    stroke-width: 1;
+}
+.loginLogo, .signOutLogo{
+  width: 25px;
+  height: 25px;
+  margin: 20px;
+}
+.loginLogo{
+  height: 30px;
+}
+.homeLogo:hover {fill: var(--logoColorHover)}
+.homeLogo:hover {fill: var(--logoColorHover)}
+.settingLogo:hover {fill: var(--logoColorHover)}
+.signOutLogo:hover {fill: var(--logoColorHover)}
+.achiveLogo:hover {fill: var(--logoColorHover)}
+.tipsLogo:hover {fill: var(--logoColorHover)}
+.loginLogo:hover {fill: var(--logoColorHover)}
+.dashboardlogo:hover {fill: var(--logoColorHover)}
+.dashboardlogo:hover{
+    stroke: var(--logoColorHover);
+    stroke-width: 1;
+  }
+.feedbackLogo:hover path {
+    stroke: var(--logoColorHover);
+    stroke-width: 3;
+  }
+
+/* navbar style  */
+nav, .nav-btn {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 4vw;
+  align-items: center;
+}
+.nav-btn{
+  place-content: center;
+}
+.vl {
+  border-left: 1px solid #525974;
+  height: 90vh;
+  position: absolute;
+  left: 70px;
+  margin-left: -3px;
+  top: 5vh;
+}
