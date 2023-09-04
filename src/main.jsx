@@ -7,6 +7,7 @@ import {
   createRoutesFromElements,
   createBrowserRouter 
 } from 'react-router-dom'
+import { Provider } from 'react-redux';
 import Layout from './Layout'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
@@ -22,6 +23,7 @@ import WordRace from './components/games/WordRace'
 import SpellingChecker from './components/games/SpellingChecker'
 import { requireAuth } from "./utils"
 import Logout from './components/Logout'
+import store from './store/store';
 
 
 const router = createBrowserRouter(createRoutesFromElements(
@@ -59,5 +61,7 @@ const router = createBrowserRouter(createRoutesFromElements(
 ))
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />,
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 )

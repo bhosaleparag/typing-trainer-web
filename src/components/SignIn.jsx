@@ -7,23 +7,24 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-
-import { useAuthState } from "react-firebase-hooks/auth";
-import { doc, setDoc } from "firebase/firestore"; 
+import { useDispatch } from "react-redux";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, googleProvider, db } from "../firebase";
+import { setName } from "../store/userActions";
 import "firebase/auth";
 
 export default function SignIn() {
-  const navigate = useNavigate()
-  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const signIn = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password).then(() => {
-        navigate("/dashboard");
-      })
+      await signInWithEmailAndPassword(auth, email, password)
+      const docSnap = await getDoc(doc(db, "users", auth.currentUser.uid));
+      dispatch(setName(docSnap.data()));
+      navigate("/dashboard");
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -36,18 +37,13 @@ export default function SignIn() {
       await setDoc(doc(db, "users", user.uid), {
         name: user.displayName,
         email: user.email,
+        photo: user.photoURL,
       });
+      dispatch(setName(user));
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
       alert(err.message);
-    }
-  };
-  const logOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (err) {
-      console.error(err);
     }
   };
   return (
@@ -84,14 +80,10 @@ export default function SignIn() {
         <span style={{ marginLeft: "20px" }}>
           -------------------------- OR -------------------------
         </span>
-        {user ? (
-          <button onClick={logOut} className="btn">logOut</button>
-        ) : (
-          <button onClick={signInWithGoogle} className="btn btnGoogle">
-            <GoogleLogo className="googleLogo" />
-            <span>Signin with google</span>
-          </button>
-        )}
+        <button onClick={signInWithGoogle} className="btn btnGoogle">
+          <GoogleLogo className="googleLogo" />
+          <span>Signin with google</span>
+        </button>
       </div>
     </>
   );

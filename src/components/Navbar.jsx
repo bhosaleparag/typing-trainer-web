@@ -10,7 +10,10 @@ import { ReactComponent as TipsLogo } from "../assets/bulb.svg";
 import { ReactComponent as LoginLogo } from "../assets/login.svg";
 import { ReactComponent as DashboardLogo } from "../assets/dashboard.svg";
 import typingIcon from "../assets/letter-t.png";
+import { useSelector } from 'react-redux';
 export default function Navbar() {
+  const name = useSelector((state) => state.user.name);
+  console.log(name);
   return (
     <>
       <nav>
@@ -23,7 +26,7 @@ export default function Navbar() {
           <Link to={"/feedback"}><FeedbackLogo className="logo feedbackLogo" /></Link>
           <Link to={"/tips"}><TipsLogo className="logo tipsLogo" /></Link>
         </div>
-        {user ? (
+        {name ? (
           <Link to={"/logout"}><SignOutLogo className="logo loginLogo" /></Link>
         ) : (
           <Link to={"/signIn"}><LoginLogo className="logo loginLogo" /></Link>
