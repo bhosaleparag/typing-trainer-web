@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../firebase"
 import { ReactComponent as HomeLogo } from "../assets/home.svg";
 import { ReactComponent as FeedbackLogo } from "../assets/feedback.svg";
 import { ReactComponent as AchiveLogo } from "../assets/achive.svg";
@@ -21,9 +22,12 @@ export default function Navbar() {
           <Link to={"/setting"}><SettingLogo className="logo settingLogo" /></Link>
           <Link to={"/feedback"}><FeedbackLogo className="logo feedbackLogo" /></Link>
           <Link to={"/tips"}><TipsLogo className="logo tipsLogo" /></Link>
-          {/* <SignOutLogo className="logo signOutLogo" /> */}
         </div>
-        <Link to={"/signIn"}><LoginLogo className="logo loginLogo" /></Link>
+        {user ? (
+          <Link to={"/logout"}><SignOutLogo className="logo loginLogo" /></Link>
+        ) : (
+          <Link to={"/signIn"}><LoginLogo className="logo loginLogo" /></Link>
+        )}
         <div class="vl"></div>
       </nav>
     </>
