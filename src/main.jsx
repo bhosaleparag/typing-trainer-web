@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom'
 import Layout from './Layout'
 import SignIn from './components/SignIn'
+import SignUp from './components/SignUp'
 import NotFound from './components/NotFound'
 import Home from './components/Home'
 import Dashboard from './components/Dashboard'
@@ -26,6 +27,7 @@ const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Layout/>}>
     <Route index element={<Home/>}/>
     <Route path="signIn" element={<SignIn/>}/>
+    <Route path="signUp" element={<SignUp/>}/>
     <Route path="dashboard" element={<Dashboard/>} 
       loader={async () => {return await requireAuth()}}
     />

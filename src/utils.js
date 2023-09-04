@@ -1,8 +1,9 @@
 import { redirect } from "react-router-dom"
-
+import { auth } from "./firebase"
 export async function requireAuth() {
-    const isLoggedIn = await localStorage.getItem("loggedin")
-    if (!isLoggedIn) {
+    let user = auth.currentUser;
+    console.log(user)
+    if (!user) {
         throw redirect(
             "/signIn"
         )
