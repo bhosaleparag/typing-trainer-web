@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as GoogleLogo } from "../assets/google.svg";
 import typingIcon from "../assets/letter-t.png";
 import {
@@ -7,20 +7,23 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+
 import { useAuthState } from "react-firebase-hooks/auth";
-// import { useCollection } from "react-firebase-hooks/firestore";
+import { doc, setDoc } from "firebase/firestore"; 
 import { auth, googleProvider, db } from "../firebase";
 import "firebase/auth";
 
 export default function SignIn() {
+  const navigate = useNavigate()
   const [user] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log(auth?.currentUser?.email);
   const signIn = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password).then(() => {
+        navigate("/dashboard");
+      })
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -28,15 +31,20 @@ export default function SignIn() {
   };
   const signInWithGoogle = async () => {
     try {
-      localStorage.setItem("loggedin", true);
-      await signInWithPopup(auth, googleProvider);
+      const res = await signInWithPopup(auth, googleProvider);
+      const user = res.user;
+      await setDoc(doc(db, "users", user.uid), {
+        name: user.displayName,
+        email: user.email,
+      });
+      navigate("/dashboard");
     } catch (err) {
       console.error(err);
+      alert(err.message);
     }
   };
   const logOut = async () => {
     try {
-      localStorage.removeItem("loggedin");
       await signOut(auth);
     } catch (err) {
       console.error(err);

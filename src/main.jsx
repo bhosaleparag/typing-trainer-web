@@ -21,12 +21,14 @@ import CodeTyping from './components/games/CodeTyping'
 import WordRace from './components/games/WordRace'
 import SpellingChecker from './components/games/SpellingChecker'
 import { requireAuth } from "./utils"
+import Logout from './components/Logout'
 
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Layout/>}>
     <Route index element={<Home/>}/>
     <Route path="signIn" element={<SignIn/>}/>
+    <Route path="logout" element={<Logout/>}/>
     <Route path="signUp" element={<SignUp/>}/>
     <Route path="dashboard" element={<Dashboard/>} 
       loader={async () => {return await requireAuth()}}
