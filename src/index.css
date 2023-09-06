@@ -100,6 +100,12 @@ nav, .nav-btn {
   margin-left: -3px;
   top: 5vh;
 }
+.profileImg {
+  height: 40px;
+  width: 40px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+}
 
 /* games box inside home.jsx style */
 .gamesContainer {
@@ -228,3 +234,30 @@ h1 {
   font-size: 16px;
 }
 
+/* word race style  */
+.wordRaceContainer{
+  position: relative;
+  border: 2px solid #525974;
+  border-radius: 11px;
+  height: 80vh;
+  margin: 10px;
+  width: 70vw;
+}
+.WordRace{
+  display: flex;
+}
+.ipt-wordRace {
+  height: 5vh;
+  width: 59vw;
+  margin: 10px;
+  background: #181c2c;
+  font-size: 23px;
+  color: var(--logoColorHover);
+  padding: 5px;
+  border: 2px solid var(--logoColorHover);
+  border-radius: 10px;
+}
+.wordRace-btn{
+  width: 10vw;
+  font-size: 20px;
+}

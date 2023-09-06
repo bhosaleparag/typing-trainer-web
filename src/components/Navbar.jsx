@@ -25,9 +25,10 @@ export default function Navbar() {
           <Link to={"/setting"}><SettingLogo className="logo settingLogo" /></Link>
           <Link to={"/feedback"}><FeedbackLogo className="logo feedbackLogo" /></Link>
           <Link to={"/tips"}><TipsLogo className="logo tipsLogo" /></Link>
+          {name && <Link to={"/logout"}><SignOutLogo className="logo loginLogo" /></Link>}
         </div>
         {name ? (
-          <Link to={"/logout"}><SignOutLogo className="logo loginLogo" /></Link>
+          <Link to={"/setting"}><img src={name.photo} className="profileImg"/></Link>
         ) : (
           <Link to={"/signIn"}><LoginLogo className="logo loginLogo" /></Link>
         )}

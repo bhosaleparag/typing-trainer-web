@@ -24,7 +24,7 @@ export default function SignIn() {
       await signInWithEmailAndPassword(auth, email, password)
       const docSnap = await getDoc(doc(db, "users", auth.currentUser.uid));
       dispatch(setName(docSnap.data()));
-      navigate("/dashboard");
+      navigate("/");
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -39,8 +39,9 @@ export default function SignIn() {
         email: user.email,
         photo: user.photoURL,
       });
-      dispatch(setName(user));
-      navigate("/dashboard");
+      const docSnap = await getDoc(doc(db, "users", user.uid));
+      dispatch(setName(docSnap.data()));
+      navigate("/");
     } catch (err) {
       console.error(err);
       alert(err.message);
