@@ -32,7 +32,7 @@ export default function Navbar() {
         ) : (
           <Link to={"/signIn"}><LoginLogo className="logo loginLogo" /></Link>
         )}
-        <div class="vl"></div>
+        <div className="vl"></div>
       </nav>
     </>
   );

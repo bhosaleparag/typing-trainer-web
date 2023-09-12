@@ -1,36 +1,50 @@
 import React, { useState, useEffect } from "react";
-import wordList from "../../wordList.js"
+import wordList from "../../wordList.js";
+// import { doc, setDoc } from "firebase/firestore";
+// import { db } from "../../firebase";
+import { useSelector } from 'react-redux';
 
 function WordRace() {
+  // const name = useSelector((state) => state.user.name);
   const [top, setTop] = useState(0);
+  const [left, setLeft] = useState(0);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [inputWord, setInputWord] = useState("");
+  const [score, setScore] = useState(0);
   const [isMatched, setIsMatched] = useState(false);
+  const [inputWord, setInputWord] = useState("");
   const screenHeight = 500;
-  const speed = 1;
+  const speed = 1.5;
   const word = wordList[currentWordIndex];
-
+  
   const handleMatch = () => {
-    setCurrentWordIndex(Math.floor(Math.random() * 111));
     setTop(0);
+    setLeft(Math.floor(Math.random() * 940));
+    setCurrentWordIndex(Math.floor(Math.random() * 111));
     setIsMatched(false);
     setInputWord("");
   };
+
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      handleSubmit(e);
+      handleSubmit();
     }
   };
-  const handleSubmit = () => {
-    console.log("noc");
-    if (inputWord === word) {
-      setIsMatched(true);
-    }
-  };
+  const handleSave = () =>{
+    console.log("dsa");
+    
+  }
+  const handleSubmit = React.useCallback(
+    () => { 
+      if (inputWord === word) {
+        setIsMatched(true);
+        setScore(score + 1);
+      }
+    },
+    [inputWord, score]
+  );
 
   useEffect(() => {
     let animationFrameId;
-    console.log("dsa");
     const animate = () => {
       setTop((prevTop) => {
         if (prevTop + speed >= screenHeight) {
@@ -48,17 +62,22 @@ function WordRace() {
       cancelAnimationFrame(animationFrameId);
     };
   }, [currentWordIndex]);
-
+ 
   useEffect(() => {
     if (isMatched) {
       handleMatch();
+      console.log(name);
     }
   }, [isMatched]);
 
-  const style = {
-    position: "absolute",
-    top: `${top}px`,
-  };
+  const style = React.useMemo(() => {
+    return {
+      position: "absolute",
+      top: `${top}px`,
+      left: `${left}px`,
+      fontSize: "25px",
+    };
+  }, [top, left]);
   return (
     <div className="WordRace">
       <div>
@@ -79,10 +98,20 @@ function WordRace() {
           SUBMIT
         </button>
       </div>
-      <div>
-        <div className="boxes">current Score</div>
-        <div className="boxes">high Score</div>
-        <div className="boxes">current level</div>
+      <div className="sideInfoWordRace">
+      <div className="boxes">
+        <p className="boxes-title">Current Score</p>
+        <p className="boxes-data">{score}</p>
+      </div>
+        <div className="boxes">
+          <p className="boxes-title">High - Score</p>
+          <p className="boxes-data">{213}</p>
+        </div>
+        <div className="boxes">
+          <p className="boxes-title">Rank</p>
+          <img src="https://firebasestorage.googleapis.com/v0/b/typing-trainer-ec708.appspot.com/o/badge%2Fbadge1.png?alt=media&token=e74041a6-5bd5-4eea-ba2d-0ec35b60c026"/>
+        </div>
+        <button onClick={handleSave} className="btn wordRace-btn">SAVE</button>
       </div>
     </div>
   );

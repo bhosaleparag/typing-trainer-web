@@ -14,10 +14,10 @@ export default[
     'eucalyptus', 'flamingo', 'garden', 'harmony', 'iceberg',
     'jigsaw', 'kiwi', 'lullaby', 'monsoon', 'nebula',
     'octopus', 'penguin', 'quokka', 'rainforest', 'sunflower',
-    'toucan', 'umbrella', 'volcano', 'waterfall', 'xylophone',
+    'toucan', 'umbrella', 'volcano', 'waterfall', 'netbean',
     'yacht', 'zeppelin', 'alpaca', 'bamboo', 'chameleon',
     'dandelion', 'electric', 'flute', 'gazelle', 'hummingbird',
-    'iguana', 'jackal', 'kaleidoscope', 'lemur', 'mango',
+    'iguana', 'jackal', 'omkar', 'lemur', 'mango',
     'nightingale', 'opera', 'papaya', 'quail', 'rhinoceros',
     'saxophone', 'tiger', 'umbrella', 'violet', 'whale',
     'update', 'yoga', 'zebra'
