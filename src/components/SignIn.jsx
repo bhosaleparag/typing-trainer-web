@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as GoogleLogo } from "../assets/google.svg";
 import typingIcon from "../assets/letter-t.png";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, query, orderBy, limit, collection  } from "firebase/firestore";
 import { auth, googleProvider, db } from "../firebase";
 import { useDispatch } from "react-redux";
 import { setName } from "../store/userActions";
@@ -16,6 +16,22 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState("");
+  const [highestScore, setHighestScore] = useState(0);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const q = query(collection(db, "users"), orderBy("wordRaceScore", "desc"), limit(1));
+      try {
+        const querySnapshot = await getDocs(q);
+        const highestScoreValue = querySnapshot.docs[0].data().wordRaceScore;
+        setHighestScore(highestScoreValue); 
+      } catch (error) {
+        console.error("Error getting highest score:", error);
+      }
+    };
+    
+    fetchData();
+  }, []);
   const signIn = async (e) => {
     e.preventDefault();
     try {
@@ -24,6 +40,7 @@ export default function SignIn() {
       const docSnap = await getDoc(doc(db, "users", auth.currentUser.uid));
       dispatch(setName({
         ...docSnap.data(),
+        highestScoreWordRace: highestScore,
         userId: auth.currentUser.uid
       }));
       navigate("/");
@@ -52,11 +69,13 @@ export default function SignIn() {
           email: user.email,
           photo: user.photoURL,
           wordRaceScore: 0,
-          userId: user.uid
+          userId: user.uid,
+          highestScoreWordRace: highestScore,
         }));
       }else{
         dispatch(setName({
           ...docSnap.data(),
+          highestScoreWordRace: highestScore,
           userId: user.uid
         }));
       }
