@@ -34,7 +34,8 @@ export default function SignUp() {
       await setDoc(doc(db, "users", user.uid), {
         name: userData.name,
         email: userData.email,
-        photo: photoURL[Math.floor((Math.random() * 7) + 1)]
+        photo: photoURL[Math.floor((Math.random() * 7) + 1)],
+        wordRaceScore: 0
       });
       navigate("/");
     } catch (err) {

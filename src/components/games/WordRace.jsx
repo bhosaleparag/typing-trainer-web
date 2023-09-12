@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import wordList from "../../wordList.js";
-// import { doc, setDoc } from "firebase/firestore";
-// import { db } from "../../firebase";
-import { useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useSelector, useDispatch } from 'react-redux';
+import { setName } from "../../store/userActions";
 
 function WordRace() {
-  // const name = useSelector((state) => state.user.name);
+  const name = useSelector((state) => state.user.name);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(0);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -29,11 +33,20 @@ function WordRace() {
       handleSubmit();
     }
   };
-  const handleSave = () =>{
-    console.log("dsa");
-    
+  const handleSave = async (e) => {
+    e.preventDefault();
+    if(score > name.wordRaceScore){
+      await updateDoc(doc(db, "users", name.userId), {
+        wordRaceScore: score
+      });
+      dispatch(setName({
+        ...name,
+        wordRaceScore: score
+      }));
+    }
+    navigate("/");
   }
-  const handleSubmit = React.useCallback(
+  const handleSubmit = useCallback(
     () => { 
       if (inputWord === word) {
         setIsMatched(true);
@@ -66,11 +79,10 @@ function WordRace() {
   useEffect(() => {
     if (isMatched) {
       handleMatch();
-      console.log(name);
     }
   }, [isMatched]);
 
-  const style = React.useMemo(() => {
+  const style = useMemo(() => {
     return {
       position: "absolute",
       top: `${top}px`,
@@ -105,7 +117,7 @@ function WordRace() {
       </div>
         <div className="boxes">
           <p className="boxes-title">High - Score</p>
-          <p className="boxes-data">{213}</p>
+          <p className="boxes-data">{name.wordRaceScore}</p>
         </div>
         <div className="boxes">
           <p className="boxes-title">Rank</p>

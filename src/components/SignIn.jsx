@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as GoogleLogo } from "../assets/google.svg";
 import typingIcon from "../assets/letter-t.png";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { useDispatch } from "react-redux";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, googleProvider, db } from "../firebase";
+import { useDispatch } from "react-redux";
 import { setName } from "../store/userActions";
 import "firebase/auth";
 import Loader from "./Loader";
@@ -22,7 +22,10 @@ export default function SignIn() {
       setIsLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
       const docSnap = await getDoc(doc(db, "users", auth.currentUser.uid));
-      dispatch(setName(docSnap.data()));
+      dispatch(setName({
+        ...docSnap.data(),
+        userId: auth.currentUser.uid
+      }));
       navigate("/");
       setIsLoading(false);
     } catch (err) {
@@ -33,19 +36,36 @@ export default function SignIn() {
   };
   const signInWithGoogle = async () => {
     try {
+      setIsLoading(true);
       const res = await signInWithPopup(auth, googleProvider);
       const user = res.user;
-      await setDoc(doc(db, "users", user.uid), {
-        name: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-      });
       const docSnap = await getDoc(doc(db, "users", user.uid));
-      dispatch(setName(docSnap.data()));
+      if (docSnap._document === null) {
+        await setDoc(doc(db, "users", user.uid), {
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+          wordRaceScore: 0
+        });
+        dispatch(setName({
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+          wordRaceScore: 0,
+          userId: user.uid
+        }));
+      }else{
+        dispatch(setName({
+          ...docSnap.data(),
+          userId: user.uid
+        }));
+      }
       navigate("/");
+      setIsLoading(false);
     } catch (err) {
       console.error(err);
       alert(err.message);
+      setIsLoading(false);
     }
   };
   return (
