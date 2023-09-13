@@ -1,14 +1,19 @@
+/* @media screen and (max-width: 1450px) {
+  body {
+    background-color: lightgreen;
+  }
+} */
 :root {
   font-family: 'Rubik', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
   color: #f1f1f1;
   background-color: #181c2c;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
   --logoColor: #525974;
   --boxColor: #212436;
   --logoColorHover: #787eff;
@@ -92,7 +97,7 @@ nav, .nav-btn {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 4vw;
+  width: 55px;
   align-items: center;
 }
 .nav-btn{
@@ -102,8 +107,7 @@ nav, .nav-btn {
   border-left: 1px solid #525974;
   height: 90vh;
   position: absolute;
-  left: 70px;
-  margin-left: -3px;
+  left: 58px;
   top: 5vh;
 }
 .profileImg {
@@ -128,6 +132,16 @@ nav, .nav-btn {
   font-size: 25px;
   margin-left: 15%;
 }
+.score{
+  display: flex;
+  gap: 18px;
+  flex-direction: column;
+  width: 34vw;
+  left: calc(var(--gameContainerWidth) + 10vw);
+}
+.score > p{
+  margin-left: 10px;
+}
 .gamesContainer::-webkit-scrollbar {
   width: 8px;
   background-color: #181c2c;
@@ -136,6 +150,51 @@ nav, .nav-btn {
 .gamesContainer::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: var(--boxColor);
+}
+.scoreItems{
+  display: flex;
+  align-items: center;
+  height: 55px;
+  gap: 20px;
+}
+.scoreItems-avatar{
+  height: 55px;
+  border-radius: 10px;
+  width: 55px;
+}
+.scoreItems-rank {
+  height: 55px;
+  width: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0px solid;
+  border-radius: 10px;
+  background-color: var(--boxColor);
+  color: var(--logoColor);
+  font-size:20px
+}
+.scoreItems-name{
+  display: flex;
+  flex-direction: column;
+  height: 55px;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+.scoreItems-name > p{
+  margin: 0px;
+}
+.scoreItems-name > p:first-child{
+  font-size: 18px;
+}
+.scoreItems-name > p:last-child{
+  color: var(--logoColor);
+  font-size: 14px;
+}
+.scoreItems-score{
+  margin-left: auto;
+  margin-top: 5%;
+  color: var(--logoColor);
 }
 .games {
   margin-left: 12%;
@@ -178,15 +237,7 @@ nav, .nav-btn {
       transform: rotate(360deg);
   }
 }
-/* score box inside home.jsx style */
-.score{
-  width: 40vw;
-  height: 75vh;
-  position: absolute;
-  top: 15vh;
-  left: calc(var(--gameContainerWidth) + 10vw);
-  margin: 10px;
-}
+
 
 /* button style  */
 .btn{
@@ -448,4 +499,49 @@ h1 {
 		stroke-dashoffset: -56.549;
 		transform: rotate(1turn);
 	}
+}
+
+/* feedback style  */
+.feedback-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh; 
+}
+.feedback-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.feedback-container form {
+  width: 300px;
+}
+
+.feedback-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.feedback-container input,
+.feedback-container select,
+.feedback-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.feedback-container button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.feedback-container button:hover {
+  background-color: #0056b3;
 }
