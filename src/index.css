@@ -35,7 +35,7 @@ body,#root {
   margin-left: 2vw;
 }
 
-@media (max-width: 600px) {
+@media (max-height: 750px) {
   /* CSS styles for mobile devices */
   .nav-btn{
     height: 69vh;
