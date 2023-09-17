@@ -15,7 +15,6 @@ import SignUp from './components/SignUp'
 import NotFound from './components/NotFound'
 import Home from './components/Home'
 import Dashboard from './components/Dashboard'
-import Achievement from './components/Achievement'
 import Setting from './components/Setting'
 import Tips from './components/Tips'
 import Feedback from './components/Feedback'
@@ -34,9 +33,6 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path="logout" element={<Logout/>}/>
     <Route path="signUp" element={<SignUp/>}/>
     <Route path="dashboard" element={<Dashboard/>} 
-      loader={async () => {return await requireAuth()}}
-    />
-    <Route path="achievement" element={<Achievement/>}
       loader={async () => {return await requireAuth()}}
     />
     <Route path="setting" element={<Setting />}

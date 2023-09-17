@@ -1,6 +1,18 @@
 :root {
   font-family: 'Rubik', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
+  --logoColor: #525974;
+  --boxColor: #212436;
+  --logoColorHover: #787eff;
+  --gameContainerWidth: 45vw;
+  --fontColor: #f1f1f1;
+
+  --hue: 223;
+	--bg: hsl(var(--hue),90%,90%);
+	--fg: hsl(var(--hue),90%,10%);
+	--primary: hsl(var(--hue),90%,50%);
+	--trans-dur: 0.3s;
+
   color: #f1f1f1;
   background-color: #181c2c;
   font-synthesis: none;
@@ -8,17 +20,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-
-  --logoColor: #525974;
-  --boxColor: #212436;
-  --logoColorHover: #787eff;
-  --gameContainerWidth: 45vw;
-  
-  --hue: 223;
-	--bg: hsl(var(--hue),90%,90%);
-	--fg: hsl(var(--hue),90%,10%);
-	--primary: hsl(var(--hue),90%,50%);
-	--trans-dur: 0.3s;
 }
 body,#root {
   margin: 0;
@@ -31,17 +32,14 @@ body,#root {
 }
 .other {
   margin: 1vw;
-  width: 96vw;
+  height: 94vh;
+  overflow: scroll;
+  width: 94vw;
   margin-left: 2vw;
 }
-
-@media (max-height: 750px) {
-  /* CSS styles for mobile devices */
-  .nav-btn{
-    height: 69vh;
-  }
+.other::-webkit-scrollbar {
+  display: none;
 }
-
 
 /* logo's style in navbar */
 
@@ -203,7 +201,7 @@ nav, .nav-btn {
 .games {
   margin-left: 12%;
   margin-bottom: 30px;
-  height: 35%;
+  min-height: 180px;
   width: 80%;
   border: 0px solid;
   box-shadow: 2px 3px 4px 2px #171a26;
@@ -247,7 +245,7 @@ nav, .nav-btn {
 .btn{
   background-color: #6d73ff;
   font-family: 'Rubik';
-  color: #f1f1f1;
+  color: var(--fontColor);
   font-size: 14px;
   border: 0px;
   border-radius: 7px;
@@ -349,7 +347,7 @@ h1 {
 }
 .boxes-title{
   margin: 0px;
-  color: #f1f1f1;
+  color: var(--fontColor);
 }
 .boxes-data {
   font-size: 100px;
@@ -529,12 +527,18 @@ h1 {
 
 .feedback-container input,
 .feedback-container select,
+.setting select,
 .feedback-container textarea {
   width: 100%;
   padding: 10px;
+  margin-top: 10px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  font-size: 1rem;
+  border: 0px;
+  color: #f1f1f1;
+  box-shadow: 2px 3px 4px 2px #171a26;
+  border-radius: 24px;
+  background-color: var(--boxColor);
 }
 
 .feedback-container button {
@@ -556,7 +560,12 @@ h1 {
   width: 100%;
   height: 100%;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  gap: 15px;
+}
+header{
+  font-size:3rem;
 }
 .settingImg, .settingImgChange{
   height: 70px !important;
@@ -580,11 +589,56 @@ h1 {
   border-radius: 50%;
   z-index: 1;
 }
-
+.detail {
+  display: flex;
+  gap: 10px;
+  height: 230px;
+  align-items: center;
+}
+.detailCon-name:disabled{
+  border-bottom: 2px solid gray;
+}
+.detailCon-mail:disabled{
+  border-bottom: 2px solid gray;
+}
+input:disabled::placeholder {
+  color: gray
+}
+.detailCon-name::placeholder{
+  color: var(--fontColor)
+}
+.detailCon-mail::placeholder{
+  color: var(--fontColor)
+}
+.detailCon-name, .detailCon-mail{
+  border: 0;
+  border-bottom: 2px solid white;
+  outline: 0;
+  color: white;
+  font-size: 1.1rem;
+  padding: 7px 0;
+  margin-right: 10px;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.editLogo{
+  margin: 0px;
+}
+.off{
+  fill: var(--fontColor)
+}
+.detailCon {
+  display: flex;
+  margin-left: 10px;
+  flex-direction: column;
+  width: 17vw;
+  gap: 26px;
+  font-size: 1.2rem;
+}
 .change {
   position: absolute;
   font-size: 15px;
-  bottom: 1px;
+  bottom: 0px;
   left: -1px;
   border-radius: 0px 0px 5px 5px;
   height: 25px;
@@ -596,7 +650,7 @@ h1 {
   margin: 15px;
   display: flex;
   height: 90px;
-  width: 43vw;
+  width: 30vw;
   gap: 10px;
   align-items: center;
   overflow-x: scroll;
@@ -620,4 +674,37 @@ h1 {
 }
 .left{
   position: absolute;
+}
+
+/* tips style */
+.typing-tips {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.typing-tips h1 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.typing-tips ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.typing-tips li {
+  margin-bottom: 20px;
+}
+
+.typing-tips li h2 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.typing-tips li p {
+  font-size: 16px;
+  line-height: 1.5;
 }
