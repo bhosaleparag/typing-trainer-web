@@ -87,7 +87,7 @@ export default function Home() {
         <p>Best Score</p>
       {userData.map((data, i)=>{
       return (
-        <div className="scoreItems">
+        <div className="scoreItems" key={i}>
           <img src={data.photo} className="scoreItems-avatar" />
           <div className="scoreItems-rank">{i + 1}</div>
           <div className="scoreItems-name">

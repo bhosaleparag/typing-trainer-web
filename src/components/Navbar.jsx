@@ -11,6 +11,7 @@ import { ReactComponent as LoginLogo } from "../assets/login.svg";
 import { ReactComponent as DashboardLogo } from "../assets/dashboard.svg";
 import typingIcon from "../assets/letter-t.png";
 import { useSelector } from 'react-redux';
+
 export default function Navbar() {
   const name = useSelector((state) => state.user.name);
   console.log(name);

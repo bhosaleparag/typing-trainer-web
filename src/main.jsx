@@ -4,6 +4,7 @@ import './index.css'
 import { 
   RouterProvider,
   Route,
+  defer,
   createRoutesFromElements,
   createBrowserRouter 
 } from 'react-router-dom'
@@ -38,7 +39,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path="achievement" element={<Achievement/>}
       loader={async () => {return await requireAuth()}}
     />
-    <Route path="setting" element={<Setting/>}
+    <Route path="setting" element={<Setting />}
       loader={async () => {return await requireAuth()}}
     />
     <Route path="tips" element={<Tips/>}
