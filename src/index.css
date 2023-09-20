@@ -708,3 +708,46 @@ input:disabled::placeholder {
   font-size: 16px;
   line-height: 1.5;
 }
+
+/* TypingTest style */
+.box {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: 200px;
+  width: 350px;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 21pt;
+  font-family: Inconsolata;
+}
+#caret {
+  color: green;
+  margin-left: -7.29165px;
+  position: absolute;
+  transition: left .1s ease;
+}
+.word {
+  margin: 0 5px 2px;
+  position: relative;
+}
+.wordsInput{
+  display: none;
+  visibility:hidden;
+}
+@keyframes blink {
+  0%,
+  100% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0;
+  }
+}
+
+.blink {
+  -webkit-animation: blink 1.5s 1s infinite;
+  animation: blink 1.5s 1s infinite;
+}
