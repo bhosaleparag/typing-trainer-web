@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const CodeTyping = () => {
+const WordTyping = () => {
   const paragraph =
     "The sun dipped below the horizon casting a warm golden glow across the tranquil lake The water rippled gently reflecting the last remnants of daylight Birds sang their evening songs from the surrounding trees and a gentle breeze rustled the leaves It was a moment of serenity a pause in the rush of life as nature's beauty enveloped the world in a soothing embrace";
   const wordList = paragraph.split(" ");
@@ -29,9 +29,11 @@ const CodeTyping = () => {
         const currWordEl = activeWord?.current;
         if (!typedWord && typedHistory[currIdx] !== wordList[currIdx]) {
           currWordEl.previousElementSibling.classList.remove("right", "wrong");
+          if (ctrlKey) {
             currWordEl.previousElementSibling.childNodes.forEach((char) => {
               char.classList.remove("wrong", "right");
             });
+          }
         } else {
           const newTypedWord = typedWord.slice(0, typedWord.length - 1);
           setTypedWord(newTypedWord);
@@ -114,4 +116,4 @@ const CodeTyping = () => {
   );
 };
 
-export default CodeTyping;
+export default WordTyping;

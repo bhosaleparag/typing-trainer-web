@@ -18,7 +18,7 @@ import Dashboard from './components/Dashboard'
 import Setting from './components/Setting'
 import Tips from './components/Tips'
 import Feedback from './components/Feedback'
-import CodeTyping from './components/games/CodeTyping'
+import WordTyping from './components/games/WordTyping'
 import WordRace from './components/games/WordRace'
 import SpellingChecker from './components/games/SpellingChecker'
 import { requireAuth } from "./utils"
@@ -44,7 +44,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path="feedback" element={<Feedback/>}
       loader={async () => {return await requireAuth()}}
     />
-    <Route path="codeTyping" element={<CodeTyping/>}
+    <Route path="WordTyping" element={<WordTyping/>}
       loader={async () => {return await requireAuth()}}
     />
     <Route path="wordRace" element={<WordRace/>}

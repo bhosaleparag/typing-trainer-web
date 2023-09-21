@@ -80,7 +80,7 @@ export default function Home() {
             Sharpen your coding skills by typing out code snippets under the
             pressure of time. Become a coding maestro!
           </p>
-          <button className="btn" onClick={() => navigate("codeTyping")}>START</button>
+          <button className="btn" onClick={() => navigate("WordTyping")}>START</button>
         </div>
       </div>
       <div className="score gamesContainer">
