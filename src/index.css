@@ -6,7 +6,8 @@
   --logoColorHover: #787eff;
   --gameContainerWidth: 45vw;
   --fontColor: #f1f1f1;
-
+  --iptHeight: 200px;
+  --iptWidth: 350px;
   --hue: 223;
 	--bg: hsl(var(--hue),90%,90%);
 	--fg: hsl(var(--hue),90%,10%);
@@ -714,8 +715,8 @@ input:disabled::placeholder {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  height: 200px;
-  width: 350px;
+  height: var(--iptHeight);
+  width: var(--iptWidth);
   overflow: hidden;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -724,8 +725,8 @@ input:disabled::placeholder {
   font-family: Inconsolata;
 }
 #caret {
-  color: green;
-  margin-left: -7.29165px;
+  color: var(--logoColorHover);
+  margin-left: -8.29165px;
   position: absolute;
   transition: left .1s ease;
 }
@@ -734,8 +735,9 @@ input:disabled::placeholder {
   position: relative;
 }
 .wordsInput{
-  display: none;
-  visibility:hidden;
+  position: absolute;
+  height: var(--iptHeight);
+  width: var(--iptWidth);
 }
 @keyframes blink {
   0%,
@@ -746,8 +748,13 @@ input:disabled::placeholder {
       opacity: 0;
   }
 }
-
 .blink {
   -webkit-animation: blink 1.5s 1s infinite;
   animation: blink 1.5s 1s infinite;
+}
+.right{
+  color: var(--logoColor);
+}
+.wrong{
+  color: orange;
 }
