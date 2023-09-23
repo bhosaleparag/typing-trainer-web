@@ -13,7 +13,7 @@ function WordRace() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [top, setTop] = useState(0);
-  const [left, setLeft] = useState(0);
+  const [left, setLeft] = useState(2);
   const [badge, setBadge] = useState(1);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [score, setScore] = useState(name.wordRaceScore);

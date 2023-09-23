@@ -119,7 +119,7 @@ export default function SignIn() {
             </form>
           </div>
           <div>
-            Don't have an account? <Link to="/signUp"> sign up</Link>
+            Don't have an account? <Link to="/signUp" style={{color: 'orange'}}> sign up</Link>
           </div>
           <span style={{ marginLeft: "20px" }}>
             -------------------------- OR -------------------------

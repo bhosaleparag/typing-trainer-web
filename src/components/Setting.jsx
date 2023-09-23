@@ -43,7 +43,6 @@ export default function Setting() {
   };
   const handleChange = async (e) => {
     e.preventDefault();
-    console.log(userData);
     if (userData.email.includes("@")) {
       await updateDoc(doc(db, "users", name.userId), {
         name: userData.name,

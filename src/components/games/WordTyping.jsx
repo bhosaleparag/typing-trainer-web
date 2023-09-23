@@ -9,7 +9,7 @@ import { db } from "../../firebase";
 import para from "../../Data/paragraph";
 import { doc, updateDoc } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
-
+import { setName } from "../../store/userActions";
 
 const WordTyping = () => {
   const getRandomParagraph = () => {
@@ -106,15 +106,18 @@ const WordTyping = () => {
   }, [currWord.length, typedWord, activeWord]);
 
   const restart = () => {
+    const newParagraph = getRandomParagraph();
+    setParagraph(newParagraph);
+    setTypedWord("");
+    setTypedHistory([]);
     setWpm(0);
     setTimer(timeLimit);
     setIsTimerRunning(false);
-    setCurrWord(wordList[0]);
-    setTypedWord("");
-    setTypedHistory([]);
     setResult([]);
-    setParagraph(getRandomParagraph());
+    setCurrWord(newParagraph.split(" ")[0]); 
   };
+  
+  
   const save = async() => {
     dispatch(
       setName({

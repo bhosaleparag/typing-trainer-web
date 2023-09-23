@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export default function Feedback() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -16,12 +18,13 @@ export default function Feedback() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here
+    navigate("/")
     console.log('Form data submitted:', formData);
   };
 
   return (
     <div className="feedback-container">
-      <h1>Feedback Form</h1>
+      <header>Feedback Form</header>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="fullName">Full Name:</label>

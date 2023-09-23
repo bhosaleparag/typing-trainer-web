@@ -22,8 +22,7 @@ export default function Home() {
           id: doc.id,
           ...doc.data(),
         }));
-        setUserData(newData); 
-        console.log(newData);
+        setUserData(newData);
       } catch (error) {
         console.error("Error getting highest score:", error);
       }
@@ -55,11 +54,11 @@ export default function Home() {
         <div className="games">
           <div className="games-logo">
             <img src={code} className="gameCodeLogo" />
-            <h3 className="gameName">Code Typing</h3>
+            <h3 className="gameName">Word Typing</h3>
           </div>
           <p>
-            Sharpen your coding skills by typing out code snippets under the
-            pressure of time. Become a coding maestro!
+            Sharpen your typing skills by typing out paragraphs under the
+            pressure of time. And measure your WPM.
           </p>
           <button className="btn" onClick={() => navigate("WordTyping")}>START</button>
         </div>

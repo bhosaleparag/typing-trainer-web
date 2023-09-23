@@ -38,7 +38,7 @@ const Tips = () => {
 
   return (
     <div className="typing-tips">
-      <h1>Typing Tips</h1>
+      <header style={{textAlign: "center"}}>Typing Tips</header>
       <ul>
         {tips.map((tip) => (
           <li key={tip.title}>
