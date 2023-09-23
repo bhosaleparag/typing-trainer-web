@@ -10,6 +10,7 @@ import para from "../../Data/paragraph";
 import { doc, updateDoc } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
 import { setName } from "../../store/userActions";
+import { useNavigate } from "react-router-dom";
 
 const WordTyping = () => {
   const getRandomParagraph = () => {
@@ -23,6 +24,7 @@ const WordTyping = () => {
   const caretRef = useRef(null);
   const [wpm,setWpm] = useState(0)
   const timeLimit = 15;
+  const navigate = useNavigate();
   const [timer, setTimer] = useState(timeLimit);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [currWord, setCurrWord] = useState(wordList[0]);
@@ -128,7 +130,7 @@ const WordTyping = () => {
     await updateDoc(doc(db, "users", name.userId), {
       wpm: wpm,
     });
-    restart()
+    navigate("/")
   };
   return (
     <div className="test">

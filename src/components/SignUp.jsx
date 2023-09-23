@@ -37,7 +37,7 @@ export default function SignUp() {
         photo: photoURL[Math.floor((Math.random() * 7) + 1)],
         wordRaceScore: 0
       });
-      navigate("/");
+      navigate("/signIn");
     } catch (err) {
       console.error(err);
       alert(err.message);
