@@ -1,0 +1,12 @@
+export default [
+    "The sun dipped below the horizon casting a warm golden glow across the tranquil lake The water rippled gently reflecting the last remnants of daylight Birds sang their evening songs from the surrounding trees and a gentle breeze rustled the leaves It was a moment of serenity a pause in the rush of life as nature's beauty enveloped the world in a soothing embrace",
+    "The sunsets in the coastal town of Laguna Beach are renowned for their breathtaking beauty. Tourists and locals alike gather along the shoreline each evening to witness the vibrant hues of orange and pink painting the sky as the sun dips below the horizon.",
+    "Quantum computing is a cutting-edge technology that has the potential to revolutionize the field of cryptography. Unlike classical computers, quantum computers use qubits instead of bits, allowing them to perform certain calculations much faster.",
+    "The Great Wall of China, stretching over 13000 miles, is one of the most iconic landmarks in human history. It was originally built to protect China from invading forces, and it stands as a testament to ancient engineering prowess.",
+    "In the world of fashion, trends are constantly evolving. What's considered fashionable today may be out of style tomorrow. Fashion designers and enthusiasts always keep a keen eye on the latest trends.",
+    "The Amazon Rainforest is often referred to as the lungs of the Earth because of its vital role in producing oxygen and absorbing carbon dioxide. However, it currently facing deforestation at an alarming rate, posing a serious threat to the planet climate.",
+    "Yoga is a holistic practice that combines physical postures, breathing exercises, and meditation to promote physical and mental well being. It originated in ancient India and has gained popularity worldwide for its numerous health benefits.",
+    "Space exploration has come a long way since the first human landed on the moon in 1969. Today, scientists are working on ambitious missions to explore Mars and even search for signs of extraterrestrial life.",
+    "The art of sushi-making requires precision and skill. Sushi chefs, known as itamae, spend years perfecting their craft to create exquisite dishes that showcase the freshness of the ingredients.",
+    "Renewable energy sources like solar and wind power are playing an increasingly important role in addressing climate change. They offer a cleaner and more sustainable alternative to fossil fuels."
+]

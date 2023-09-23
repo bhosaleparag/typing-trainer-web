@@ -15,25 +15,6 @@ export default function Home() {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      if (auth.currentUser) {
-        const q = query(
-          collection(db, "users"),
-          orderBy("wordRaceScore", "desc"),
-          limit(1)
-        );
-        try {
-          const querySnapshot = await getDocs(q);
-          const highestScoreValue = querySnapshot.docs[0].data().wordRaceScore;
-          dispatch(
-            setName({
-              ...name,
-              highestScoreWordRace: highestScoreValue,
-            })
-          );
-        } catch (error) {
-          console.error("Error getting highest score:", error);
-        }
-      }
       const q = query(collection(db, "users"),orderBy("wordRaceScore", "desc"),limit(4));
       try {
         const querySnapshot = await getDocs(q);
@@ -91,10 +72,13 @@ export default function Home() {
           <img src={data.photo} className="scoreItems-avatar" />
           <div className="scoreItems-rank">{i + 1}</div>
           <div className="scoreItems-name">
-            <p>{data.name}</p>
             <p>Word Race</p>
+            <p>{data.name}</p>
           </div>
-          <div className="scoreItems-score">{data.wordRaceScore}</div>
+          <div className="scoreItems-score">
+          <p style={{textAlign: "end"}}>{data.wordRaceScore}</p>
+          <p>{data.wpm} <span>w/m</span></p>
+          </div>
         </div>
       );
     })}

@@ -1,13 +1,14 @@
 :root {
   font-family: 'Rubik', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
+  --bg-color: #181c2c;
   --logoColor: #525974;
   --boxColor: #212436;
   --logoColorHover: #787eff;
   --gameContainerWidth: 45vw;
   --fontColor: #f1f1f1;
-  --iptHeight: 200px;
-  --iptWidth: 350px;
+  --hl-color: orange;
+
   --hue: 223;
 	--bg: hsl(var(--hue),90%,90%);
 	--fg: hsl(var(--hue),90%,10%);
@@ -15,7 +16,7 @@
 	--trans-dur: 0.3s;
 
   color: #f1f1f1;
-  background-color: #181c2c;
+  background-color: var(--bg-color);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -147,7 +148,7 @@ nav, .nav-btn {
 }
 .gamesContainer::-webkit-scrollbar {
   width: 8px;
-  background-color: #181c2c;
+  background-color: var(--bg-color);
   border-radius: 10px;
 }
 .gamesContainer::-webkit-scrollbar-thumb {
@@ -177,7 +178,7 @@ nav, .nav-btn {
   color: var(--logoColor);
   font-size:20px
 }
-.scoreItems-name{
+.scoreItems-name, .scoreItems-score{
   display: flex;
   flex-direction: column;
   height: 55px;
@@ -187,16 +188,24 @@ nav, .nav-btn {
 .scoreItems-name > p{
   margin: 0px;
 }
-.scoreItems-name > p:first-child{
-  font-size: 18px;
+.scoreItems-score > p{
+  margin: 0px;
+}
+.scoreItems-score > p > span{
+  color: #f1f1f1;
+}
+.scoreItems-score > p:last-child{
+  font-size: 14px;
 }
 .scoreItems-name > p:last-child{
+  font-size: 18px;
+}
+.scoreItems-name > p:first-child{
   color: var(--logoColor);
   font-size: 14px;
 }
 .scoreItems-score{
   margin-left: auto;
-  margin-top: 5%;
   color: var(--logoColor);
 }
 .games {
@@ -290,7 +299,7 @@ nav, .nav-btn {
   width: 350px;
 }
 
-h1 {
+.login-form > h1 {
   font-size: 24px;
   margin-bottom: 20px;
 }
@@ -321,7 +330,7 @@ h1 {
   height: 5vh;
   width: 59vw;
   margin: 10px;
-  background: #181c2c;
+  background: var(--bg-color);
   font-size: 23px;
   color: var(--logoColorHover);
   padding: 5px;
@@ -363,7 +372,7 @@ h1 {
 .loader {
   display: flex;
   align-items: center;
-  height: 90vh;
+  height: 90%;
   justify-content: center;
 }
 .bike {
@@ -586,7 +595,7 @@ header{
   right: -14px;
   bottom: -14px;
   left: -14px;
-  border: 15px solid #181c2c;
+  border: 15px solid var(--bg-color);
   border-radius: 50%;
   z-index: 1;
 }
@@ -715,8 +724,6 @@ input:disabled::placeholder {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  height: var(--iptHeight);
-  width: var(--iptWidth);
   overflow: hidden;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -733,11 +740,6 @@ input:disabled::placeholder {
 .word {
   margin: 0 5px 2px;
   position: relative;
-}
-.wordsInput{
-  position: absolute;
-  height: var(--iptHeight);
-  width: var(--iptWidth);
 }
 @keyframes blink {
   0%,
@@ -756,5 +758,42 @@ input:disabled::placeholder {
   color: var(--logoColor);
 }
 .wrong{
-  color: orange;
+  color: var(--hl-color);
+}
+.test{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.timer{
+  font-size: 21pt;
+  margin: 10px 0px;
+}
+.timer > span{
+  color: var(--hl-color);
+}
+.result > table {
+  font-size: 16pt;
+  font-weight: 800;
+}
+.wrong {
+  color: var(--hl-color);
+}
+.restart {
+  border: 2px solid var(--logoColor);
+  cursor: pointer;
+  font-family: Inconsolata,monospace;
+  font-weight: 700;
+  font-size: 21pt;
+  margin: 10px;
+  padding: 10px;  
+  background-color: var(--bg-color);
+  color: #f1f1f1;
+}
+.restart:hover{
+  color: var(--hl-color);
+  border: 2px solid var(--hl-color);
 }
