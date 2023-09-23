@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import wordList from "../../wordList.js";
 import { useNavigate } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setName } from "../../store/userActions";
 
 function WordRace() {
+  const gameBoxRef = useRef(null);
+  const [gameBoxSize, setGameBoxSize] = useState({ width: 0, height: 0 });
   const name = useSelector((state) => state.user.name);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,11 +19,16 @@ function WordRace() {
   const [score, setScore] = useState(name.wordRaceScore);
   const [isMatched, setIsMatched] = useState(false);
   const [inputWord, setInputWord] = useState("");
-  const screenHeight = 500;
   const speed = 1.5;
   const word = wordList[currentWordIndex];
   
   useEffect(() => {
+    const divElement = gameBoxRef.current;
+    if (divElement) {
+      const width = divElement.offsetWidth - 140;
+      const height = divElement.offsetHeight - 40;
+      setGameBoxSize({ width, height });
+    }
     if(score < 10){
       setBadge(1)
     }else if(score <=25){
@@ -43,10 +50,11 @@ function WordRace() {
     }else if(score <=225){
       setBadge(10)
     }
+    
   }, []);
   const handleMatch = () => {
     setTop(0);
-    setLeft(Math.floor(Math.random() * 940));
+    setLeft(Math.floor(Math.random() * gameBoxSize.width));
     setCurrentWordIndex(Math.floor(Math.random() * 111));
     setIsMatched(false);
     setInputWord("");
@@ -54,6 +62,7 @@ function WordRace() {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
+      console.log(gameBoxSize);
       handleSubmit();
     }
   };
@@ -84,7 +93,7 @@ function WordRace() {
     let animationFrameId;
     const animate = () => {
       setTop((prevTop) => {
-        if (prevTop + speed >= screenHeight) {
+        if (prevTop + speed >= gameBoxSize.height) {
           handleMatch(); // Change the word after reaching the top
           return 0;
         }
@@ -117,7 +126,7 @@ function WordRace() {
   return (
     <div className="WordRace">
       <div>
-        <div className="wordRaceContainer">
+        <div className="wordRaceContainer" ref={gameBoxRef}>
           <div className="falling-word" style={style}>
             {word}
           </div>
