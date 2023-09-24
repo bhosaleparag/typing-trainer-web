@@ -89,7 +89,7 @@ export default function Setting() {
           <p className="change">Change</p>
         </div>
         <div className="detailCon">
-          <div>
+          <div className="detailMain">
             <input
               type="text"
               name="name"

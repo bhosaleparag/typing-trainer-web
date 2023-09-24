@@ -32,13 +32,11 @@ export default function Home() {
   return (
     <>
       <TypeAnimation
-        style={{
-          display: "block",
-          fontSize: "40px",
-        }}
+        className="TypeAnimation"
         sequence={["Welcome to, Typing Trainer...", 800, ""]}
         repeat={Infinity}
       />
+      <div className="HomeContainer">
       <div className="gamesContainer">
         <p>Games</p>
         <div className="games">
@@ -81,6 +79,7 @@ export default function Home() {
         </div>
       );
     })}
+      </div>
       </div>
     </>
   );

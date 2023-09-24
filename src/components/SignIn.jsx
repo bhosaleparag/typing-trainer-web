@@ -121,7 +121,7 @@ export default function SignIn() {
           <div>
             Don't have an account? <Link to="/signUp" style={{color: 'orange'}}> sign up</Link>
           </div>
-          <span style={{ marginLeft: "20px" }}>
+          <span className="orOption">
             -------------------------- OR -------------------------
           </span>
           <button onClick={signInWithGoogle} className="btn btnGoogle">

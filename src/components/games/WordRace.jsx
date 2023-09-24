@@ -117,15 +117,13 @@ function WordRace() {
 
   const style = useMemo(() => {
     return {
-      position: "absolute",
       top: `${top}px`,
       left: `${left}px`,
-      fontSize: "25px",
     };
   }, [top, left]);
   return (
     <div className="WordRace">
-      <div>
+      <div className="WordRaceMain">
         <div className="wordRaceContainer" ref={gameBoxRef}>
           <div className="falling-word" style={style}>
             {word}
