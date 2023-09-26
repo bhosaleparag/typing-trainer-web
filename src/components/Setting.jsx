@@ -104,7 +104,7 @@ export default function Setting() {
               onClick={() => handleInputBox("name")}
             />
           </div>
-            <div>
+            <div className="detailMain">
               <input
                 type="email"
                 name="email"
@@ -119,7 +119,7 @@ export default function Setting() {
                 onClick={() => handleInputBox("email")}
               />
             </div>
-            <div>
+            <div className="dropdownSetting">
             Font Style: 
             <select name="fontFamily" 
             value={userData.fontFamily}

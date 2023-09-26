@@ -888,7 +888,10 @@ input:disabled::placeholder {
   }
   .gamesContainer > p,
   .games {
-    margin-left: 5%;
+    margin-left: 0%;
+  }
+  .scoreItems-name > p:last-child {
+    font-size: 14px;
   }
   .score {
     width: 95%;
@@ -899,7 +902,7 @@ input:disabled::placeholder {
     gap: 10px;
   }
   nav {
-    height: 78vh;
+    height: 97vh;
   }
   .TypeAnimation {
     margin-left: 16px;
@@ -915,11 +918,14 @@ input:disabled::placeholder {
     height: 80vh;
   }
   .orOption {
-    margin-left: -43px;
+    margin-left: -76px;
+  }
+  .iptLogin {
+    width: 90%;
   }
   .detail {
-    width: 279px;
-    gap: 12px;
+    width: 254px;
+    gap: 11px;
   }
   .detailCon {
     width: 53vw;
@@ -927,7 +933,22 @@ input:disabled::placeholder {
   }
   .detailCon-name,
   .detailCon-mail {
-    width: 184px;
+    width: 162px;
+  }
+  .feedback-container {
+    margin-left: 30px;
+  }
+  .feedback-container input,
+  .feedback-container select,
+  .setting select,
+  .feedback-container textarea {
+    width: 80%;
+  }
+  .dropdownSetting {
+    width: 170px;
+  }
+  .ImgAll {
+    margin-left: 35px;
   }
   .detailMain {
     width: 214px;
@@ -947,7 +968,7 @@ input:disabled::placeholder {
   .WordRace {
     flex-direction: column;
     overflow: scroll;
-    height: 76vh;
+    height: 97vh;
   }
   .boxes {
     height: 13vh;
