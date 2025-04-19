@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import { useSelector } from "react-redux";
 
 export default function Layout() {
-  const name = useSelector((state) => state.user.name);
+  const name = useSelector((state) => state.user);
   return (
     <div className="main-container" style={{ fontFamily: name ? name.fontFamily : "Rubik" }}>
       <Navbar />

@@ -9,6 +9,7 @@ import {
   createBrowserRouter 
 } from 'react-router-dom'
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import Layout from './Layout'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
@@ -23,7 +24,7 @@ import WordRace from './components/games/WordRace'
 import SpellingChecker from './components/games/SpellingChecker'
 import { requireAuth } from "./utils"
 import Logout from './components/Logout'
-import store from './store/store';
+import { store, persistor } from './store/store';
 
 
 const router = createBrowserRouter(createRoutesFromElements(
@@ -59,6 +60,8 @@ const router = createBrowserRouter(createRoutesFromElements(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <RouterProvider router={router} />
+    <PersistGate loading={null} persistor={persistor}>
+      <RouterProvider router={router} />
+    </PersistGate>
   </Provider>
 )

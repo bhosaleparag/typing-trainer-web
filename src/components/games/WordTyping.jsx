@@ -11,12 +11,15 @@ import { doc, updateDoc } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
 import { setName } from "../../store/userActions";
 import { useNavigate } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { isMobile } from 'react-device-detect';
+
+const getRandomParagraph = () => {
+  return para[Math.floor(Math.random() * para.length)];
+};
 
 const WordTyping = () => {
-  const getRandomParagraph = () => {
-    return para[Math.floor(Math.random() * para.length)];
-  };
-  const name = useSelector((state) => state.user.name);
+  const name = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [paragraph, setParagraph] = useState(getRandomParagraph());
   const wordList = useMemo(() => paragraph.split(" "), [paragraph]);
@@ -56,6 +59,7 @@ const WordTyping = () => {
 
   const handleKeyDown = useCallback(
     (e) => {
+      console.log(e.key)
       if (e.key.length === 1) {
         setIsTimerRunning(true);
         const keyPressed = e.key;
@@ -84,12 +88,18 @@ const WordTyping = () => {
     },
     [typedWord, typedHistory, wordList, isTimerRunning]
   );
+
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
+    if(!isMobile){ 
+      document.addEventListener("keydown", handleKeyDown);
+    }
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      if(!isMobile){
+        document.removeEventListener("keydown", handleKeyDown);
+      }
     };
-  }, [handleKeyDown]);
+  }, [handleKeyDown, isMobile]);
+
   useEffect(() => {
     let idx = typedWord.length - 1;
     const currWordEl = activeWord?.current;
@@ -132,6 +142,10 @@ const WordTyping = () => {
     });
     navigate("/")
   };
+  const handleMobileInput = (e) => {
+    handleKeyDown(e);
+  };
+  
   return (
     <div className="test">
       {!timer  ? (
@@ -206,6 +220,16 @@ const WordTyping = () => {
           </div>
         </>
       )}
+      {timer && isMobile ? (
+        <div className="mobile-input">
+          <input
+            className="iptLogin"
+            type="text"
+            value={typedWord}
+            onKeyDown={(e) => handleKeyDown(e)}
+          />
+        </div>
+      ):null}
     </div>
   );
 };

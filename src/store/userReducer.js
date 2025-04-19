@@ -3,6 +3,13 @@ import { SET_NAME } from './userActions';
 
 const initialState = {
   name: '',
+  email: '',
+  photo: '',
+  userId: '',
+  wordRaceScore: 0,
+  highestScoreWordRace: 0,
+  gamesPlayed: 0,
+  badge: 1
 };
 
 const userReducer = (state = initialState, action) => {
@@ -10,7 +17,7 @@ const userReducer = (state = initialState, action) => {
     case SET_NAME:
       return {
         ...state,
-        name: action.payload,
+        ...action.payload
       };
     default:
       return state;

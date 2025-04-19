@@ -8,7 +8,7 @@ import { db } from "../firebase";
 import { ReactComponent as EditLogo } from "../assets/edit.svg";
 
 export default function Setting() {
-  const name = useSelector((state) => state.user.name);
+  const name = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const contentWrapper = useRef(null);
   const navigate = useNavigate();
@@ -122,8 +122,9 @@ export default function Setting() {
             <div className="dropdownSetting">
             Font Style: 
             <select name="fontFamily" 
-            value={userData.fontFamily}
-            onChange={handleUserData} 
+              className="form-select"
+              value={userData.fontFamily}
+              onChange={handleUserData} 
             >
               <option value="Rubik">Rubik</option>
               <option value="Inter">Inter</option>
@@ -162,7 +163,7 @@ export default function Setting() {
       ) : (
         ""
       )}
-      <button type="submit" className="btn wordRace-btn">
+      <button type="submit" className="btn wordRace-btn btn-setting">
         SUBMIT
       </button>
     </form>

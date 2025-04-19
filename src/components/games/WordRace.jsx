@@ -6,22 +6,35 @@ import { db } from "../../firebase";
 import { useSelector, useDispatch } from 'react-redux';
 import { setName } from "../../store/userActions";
 
+const BADGE_THRESHOLDS = [
+  { score: 0, badge: 1 },
+  { score: 25, badge: 2 },
+  { score: 50, badge: 3 },
+  { score: 75, badge: 4 },
+  { score: 100, badge: 5 },
+  { score: 125, badge: 6 },
+  { score: 150, badge: 7 },
+  { score: 175, badge: 8 },
+  { score: 200, badge: 9 },
+  { score: 225, badge: 10 }
+];
+
 function WordRace() {
   const gameBoxRef = useRef(null);
   const [gameBoxSize, setGameBoxSize] = useState({ width: 0, height: 0 });
-  const name = useSelector((state) => state.user.name);
+  const name = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(2);
   const [badge, setBadge] = useState(1);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [score, setScore] = useState(name.wordRaceScore);
+  const [score, setScore] = useState(name.wordRaceScore || 0);
   const [isMatched, setIsMatched] = useState(false);
   const [inputWord, setInputWord] = useState("");
   const speed = 1.5;
   const word = wordList[currentWordIndex];
-  
+
   useEffect(() => {
     const divElement = gameBoxRef.current;
     if (divElement) {
@@ -29,29 +42,15 @@ function WordRace() {
       const height = divElement.offsetHeight - 40;
       setGameBoxSize({ width, height });
     }
-    if(score < 10){
-      setBadge(1)
-    }else if(score <=25){
-      setBadge(2)
-    }else if(score <=50){
-      setBadge(3)
-    }else if(score <=75){
-      setBadge(4)
-    }else if(score <=100){
-      setBadge(5)
-    }else if(score <=125){
-      setBadge(6)
-    }else if(score <=150){
-      setBadge(7)
-    }else if(score <=175){
-      setBadge(8)
-    }else if(score <=200){
-      setBadge(9)
-    }else if(score <=225){
-      setBadge(10)
-    }
-    
   }, []);
+
+  useEffect(() => {
+    const currentBadge = BADGE_THRESHOLDS.find(
+      threshold => score <= threshold.score
+    )?.badge || BADGE_THRESHOLDS[BADGE_THRESHOLDS.length - 1].badge;
+    setBadge(currentBadge);
+  }, [score]);
+
   const handleMatch = () => {
     setTop(0);
     setLeft(Math.floor(Math.random() * gameBoxSize.width));
@@ -62,13 +61,13 @@ function WordRace() {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      console.log(gameBoxSize);
       handleSubmit();
     }
   };
+
   const handleSave = async (e) => {
     e.preventDefault();
-    if(score > name.wordRaceScore){
+    if(score > (name?.wordRaceScore || 0)){
       await updateDoc(doc(db, "users", name.userId), {
         wordRaceScore: score
       });
@@ -79,6 +78,7 @@ function WordRace() {
     }
     navigate("/");
   }
+
   const handleSubmit = useCallback(
     () => { 
       if (inputWord === word) {
@@ -121,6 +121,7 @@ function WordRace() {
       left: `${left}px`,
     };
   }, [top, left]);
+
   return (
     <div className="WordRace">
       <div className="WordRaceMain">
@@ -148,7 +149,7 @@ function WordRace() {
       </div>
         <div className="boxes">
           <p className="boxes-title">High - Score</p>
-          <p className="boxes-data">{name.highestScoreWordRace}</p>
+          <p className="boxes-data">{name.highestScoreWordRace || 0}</p>
         </div>
         <div className="boxes">
           <p className="boxes-title">Rank</p>

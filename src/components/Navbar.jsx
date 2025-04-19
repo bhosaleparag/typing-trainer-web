@@ -11,7 +11,7 @@ import typingIcon from "../assets/letter-t.png";
 import { useSelector } from 'react-redux';
 
 export default function Navbar() {
-  const name = useSelector((state) => state.user.name);
+  const name = useSelector((state) => state.user);
   return (
     <>
       <nav>

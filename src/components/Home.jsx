@@ -11,7 +11,7 @@ export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [userData, setUserData] = React.useState([]);
-  const name = useSelector((state) => state.user.name);
+  const name = useSelector((state) => state.user);
 
   React.useEffect(() => {
     const fetchData = async () => {

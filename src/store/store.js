@@ -1,11 +1,22 @@
 // store.js
 import { createStore, combineReducers } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import userReducer from './userReducer';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['user'] // only user will be persisted
+};
 
 const rootReducer = combineReducers({
   user: userReducer,
 });
 
-const store = createStore(rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export default store;
+const store = createStore(persistedReducer);
+const persistor = persistStore(store);
+
+export { store, persistor };
